@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DocumentManagementProject.ViewModels.DocumentViewModel>
+
+@{
+    ViewBag.Title = "Documents";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.FileName, "OpenFile", "Document", new { id = @item.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<form action="/Document/Upload" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label for="fileName">Upload File</label>
+        <input type="file" name="fileName" onchange="submit();" />
+    </div>
+
+</form>
+
+
